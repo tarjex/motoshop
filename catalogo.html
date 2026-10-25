@@ -25,7 +25,7 @@
   <a class="brand" href="moto_shop_con_rueda_carga.html" aria-label="Volver al inicio de Moto Shop"><span class="brand-mark">M</span><span>MOTO SHOP<small>ALTA GRACIA · CÓRDOBA</small></span></a>
   <p class="side-label">Navegación</p>
   <nav class="side-nav" aria-label="Navegación del catálogo">
-    <a class="side-link" href="moto_shop_con_rueda_carga.html"><span class="ico">⌂</span>Volver al inicio</a>
+    <a class="side-link" href="index.html"><span class="ico">⌂</span>Volver al inicio</a>
     <button class="side-link active" type="button" data-category="Todos"><span class="ico">▦</span>Todo el catálogo</button>
     <button class="side-link" type="button" data-category="Repuestos"><span class="ico">⚙</span>Repuestos</button>
     <button class="side-link" type="button" data-category="Accesorios"><span class="ico">✦</span>Accesorios</button>
@@ -78,8 +78,8 @@ const productsData = Object.entries(categoryDetails).flatMap(([category, info]) 
   category,
   title: `Completar producto ${String(i+1).padStart(2,'0')}`,
   description: 'Agregá acá una descripción del producto, sus características y compatibilidad.',
-  price: 'Consultar precio',
-  image: '',
+  price: '$1000,
+  image: 'https://images.unsplash.com/photo-1558980394-0c9b7d8f4c3f?auto=format&fit=crop&w=700&q=80',
   icon: info.icon,
   suggestedTitle: title
 })));
