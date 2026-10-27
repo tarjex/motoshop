@@ -81,11 +81,11 @@
     </div>
     <section class="products" id="products" aria-label="Productos del catálogo"></section>
     <div class="empty" id="empty"><strong>No encontramos productos</strong>Probá con otra palabra o elegí una categoría diferente.</div>
-    <footer class="footer"><span>© 2026 Moto Shop · Alta Gracia, Córdoba</span><span>¿Tenés una consulta? <a href="https://wa.me/543547430686?text=Hola%20Moto%20Shop%2C%20tengo%20una%20consulta%20sobre%20el%20cat%C3%A1logo." target="_blank" rel="noopener">Contactanos por WhatsApp ↗</a></span></footer>
+    <footer class="footer"><span>© 2026 Moto Shop · Alta Gracia, Córdoba</span><span>¿Tenés una consulta? <a href="https://wa.me/5493547506932?text=Hola%20Moto%20Shop%2C%20tengo%20una%20consulta%20sobre%20el%20cat%C3%A1logo." target="_blank" rel="noopener">Contactanos por WhatsApp ↗</a></span></footer>
   </div>
 </main>
 </div>
-<a class="wa-float" href="https://wa.me/543547430686?text=Hola%20Moto%20Shop%2C%20tengo%20una%20consulta%20sobre%20el%20cat%C3%A1logo." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><img class="fab-ico" src="https://i.postimg.cc/7L2VMnBV/image-removebg-preview-%282%29.png" alt="" width="44" height="44" decoding="async" style="object-fit:contain"><span class="fab-label">¿Consultas? Escribinos</span></a>
+<a class="wa-float" href="https://wa.me/5493547506932?text=Hola%20Moto%20Shop%2C%20tengo%20una%20consulta%20sobre%20el%20cat%C3%A1logo." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><img class="fab-ico" src="https://i.postimg.cc/7L2VMnBV/image-removebg-preview-%282%29.png" alt="" width="44" height="44" decoding="async" style="object-fit:contain"><span class="fab-label">¿Consultas? Escribinos</span></a>
 <script>
 /*
   ==========================================================
@@ -114,7 +114,7 @@
   (más abajo) y desaparecen todas de golpe.
   ==========================================================
 */
-const WA_NUMBER = '543547430686';
+const WA_NUMBER = '5493547506932';
 const placeholderImage = {
   'Repuestos':'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=700&q=80',
   'Accesorios':'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=700&q=80',
@@ -166,14 +166,14 @@ const plantillas = Object.entries(categoryDetails).flatMap(([category, info]) =>
   category,
   title: `Completar producto ${String(i+1).padStart(2,'0')}`,
   description: 'Agregá acá una descripción del producto, sus características y compatibilidad.',
-  price: 'Consultar precio',
+  price: 'Completar precio',
   image: '',
   suggestedTitle: title
 })));
 
 /* Une todo y completa lo que falte (ícono, imagen vacía, etc.). No hace falta tocarlo. */
 const productsData = [...MIS_PRODUCTOS, ...(MOSTRAR_PLANTILLAS ? plantillas : [])].map(p => ({
-  description: '', price: 'Consultar precio', image: '', suggestedTitle: '',
+  description: '', price: 'Completar precio', image: '', suggestedTitle: '',
   ...p,
   icon: (categoryDetails[p.category] || {}).icon || '•'
 }));
