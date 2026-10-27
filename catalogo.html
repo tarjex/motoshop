@@ -24,15 +24,28 @@
 .wa-float:active{transform:scale(.94)}
 .wa-float::before,.wa-float::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #E8281E;opacity:0;pointer-events:none;animation:fabRing 2.6s ease-out infinite}
 .wa-float::after{animation-delay:1.3s}
-.wa-float .fab-ico{width:34px;height:34px;display:block;transform-origin:50% 60%;animation:fabWiggle 5s ease-in-out 4s infinite}
+.wa-float .fab-ico{width:44px;height:44px;object-fit:contain;display:block;transform-origin:50% 60%;animation:fabWiggle 5s ease-in-out 4s infinite}
 .wa-float .fab-label{position:absolute;right:calc(100% + 12px);top:50%;transform:translateY(-50%) translateX(8px);background:#fff;color:#111;font-size:12px;font-weight:800;white-space:nowrap;padding:9px 13px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;pointer-events:none;animation:fabLabel 7s ease 3.6s 1 forwards}
 .wa-float .fab-label::after{content:"";position:absolute;left:100%;top:50%;margin-top:-5px;border:5px solid transparent;border-left-color:#fff}
 .wa-float:hover .fab-label{opacity:1;transform:translateY(-50%);animation:none}
 @keyframes fabRing{0%{transform:scale(1);opacity:.75}100%{transform:scale(1.75);opacity:0}}
 @keyframes fabWiggle{0%,72%,100%{transform:rotate(0)}76%{transform:rotate(-14deg) scale(1.08)}82%{transform:rotate(12deg) scale(1.08)}88%{transform:rotate(-8deg)}94%{transform:rotate(5deg)}}
 @keyframes fabLabel{0%{opacity:0;transform:translateY(-50%) translateX(10px)}10%,80%{opacity:1;transform:translateY(-50%)}100%{opacity:0;transform:translateY(-50%) translateX(10px)}}
-@media(max-width:700px){.wa-float{width:58px;height:58px;bottom:14px;right:14px}.wa-float .fab-ico{width:32px;height:32px}.wa-float .fab-label{font-size:11px;padding:8px 11px}}
+@media(max-width:700px){.wa-float{width:58px;height:58px;bottom:14px;right:14px}.wa-float .fab-ico{width:40px;height:40px}.wa-float .fab-label{font-size:11px;padding:8px 11px}}
 @media(prefers-reduced-motion:reduce){.wa-float::before,.wa-float::after,.wa-float .fab-ico,.wa-float .fab-label{animation:none!important}}
+
+/* CARRUSEL DE MARCAS */
+.brands{margin:0 0 22px;background:#fff;border:1px solid #e3e6ea;border-radius:14px;padding:14px 0 16px;overflow:hidden}
+.brands-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted,#6b7280);text-align:center;margin:0 0 12px}
+.brands-title b{color:var(--accent,#E8281E)}
+.brands-viewport{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.brands-track{display:flex;width:max-content;gap:14px;animation:brandsScroll 35s linear infinite}
+.brands:hover .brands-track{animation-play-state:paused}
+.brand-chip{flex:0 0 auto;display:flex;align-items:center;justify-content:center;min-width:130px;height:56px;padding:0 22px;border:1px solid #e3e6ea;border-radius:10px;background:#fafbfc;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:22px;letter-spacing:.06em;text-transform:uppercase;color:#1b1f27;white-space:nowrap}
+.brand-chip img{max-height:34px;max-width:110px;object-fit:contain;display:block}
+@keyframes brandsScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 7px))}}
+@media(max-width:700px){.brand-chip{min-width:104px;height:48px;font-size:18px;padding:0 16px}.brand-chip img{max-height:28px;max-width:88px}}
+@media(prefers-reduced-motion:reduce){.brands-track{animation:none}.brands-viewport{overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -59,6 +72,10 @@
   </div>
   <div class="content">
     <div class="heading-row"><div><div class="eyebrow" id="eyebrow">Encontrá lo que necesitás</div><h1 id="pageTitle">Catálogo <em>Moto Shop.</em></h1><p class="intro" id="pageIntro">Explorá nuestros productos, buscá por nombre o categoría y consultá disponibilidad directamente por WhatsApp.</p></div><div class="result-note" id="resultNote">Mostrando 100 productos</div></div>
+    <section class="brands" aria-label="Marcas con las que trabajamos">
+      <h2 class="brands-title">Marcas con las que <b>trabajamos</b></h2>
+      <div class="brands-viewport"><div class="brands-track" id="brandsTrack"></div></div>
+    </section>
     <div class="category-pills" aria-label="Filtrar por categoría">
       <button class="pill active" data-category="Todos" type="button">Todos</button><button class="pill" data-category="Repuestos" type="button">Repuestos</button><button class="pill" data-category="Accesorios" type="button">Accesorios</button><button class="pill" data-category="Cascos" type="button">Cascos</button><button class="pill" data-category="Indumentaria" type="button">Indumentaria</button>
     </div>
@@ -68,7 +85,7 @@
   </div>
 </main>
 </div>
-<a class="wa-float" href="https://wa.me/543547430686?text=Hola%20Moto%20Shop%2C%20tengo%20una%20consulta%20sobre%20el%20cat%C3%A1logo." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><svg class="fab-ico" viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3C8.8 3 3 8.2 3 14.6c0 2.7 1 5.2 2.7 7.1L4.5 28l6.2-2.1c1.6.5 3.4.8 5.300.8 7.200 0 13-5.200 13-11.600S23.200 3 16 3z"/><g transform="translate(9.4 7.9) scale(.56)"><path fill="#E8281E" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></g></svg><span class="fab-label">¿Consultas? Escribinos</span></a>
+<a class="wa-float" href="https://wa.me/543547430686?text=Hola%20Moto%20Shop%2C%20tengo%20una%20consulta%20sobre%20el%20cat%C3%A1logo." target="_blank" rel="noopener" aria-label="Contactar por WhatsApp"><img class="fab-ico" src="https://i.postimg.cc/7L2VMnBV/image-removebg-preview-%282%29.png" alt="" width="44" height="44" decoding="async" style="object-fit:contain"><span class="fab-label">¿Consultas? Escribinos</span></a>
 <script>
 /*
   ==========================================================
@@ -193,6 +210,21 @@ document.querySelectorAll('[data-category]').forEach(el => el.addEventListener('
 searchInput.addEventListener('input', renderProducts);
 document.getElementById('menuToggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
 renderProducts();
+</script>
+<script>
+/* ===== MARCAS =====
+   Para usar el logo real de una marca, agregá  logo:"URL_DE_LA_IMAGEN"  (ej: {name:"Honda",logo:"https://i.postimg.cc/xxxx/honda.png"}).
+   Sin logo se muestra el nombre en texto. Editá / agregá / quitá marcas acá. */
+const MARCAS=[
+  {name:"Honda"},{name:"Yamaha"},{name:"Suzuki"},{name:"Kawasaki"},{name:"Zanella"},{name:"Motomel"},
+  {name:"Corven"},{name:"Gilera"},{name:"Keller"},{name:"Beta"},{name:"Bajaj"},{name:"KTM"}
+];
+(function(){
+  const t=document.getElementById("brandsTrack");if(!t)return;
+  const chip=m=>'<div class="brand-chip" title="'+m.name+'">'+(m.logo?'<img src="'+m.logo+'" alt="'+m.name+'" loading="lazy">':m.name)+'</div>';
+  const one=MARCAS.map(chip).join("");
+  t.innerHTML=one+one;
+})();
 </script>
 </body>
 </html>
