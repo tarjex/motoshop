@@ -166,14 +166,14 @@ const plantillas = Object.entries(categoryDetails).flatMap(([category, info]) =>
   category,
   title: `Completar producto ${String(i+1).padStart(2,'0')}`,
   description: 'Agregá acá una descripción del producto, sus características y compatibilidad.',
-  price: 'Completar precio',
+  price: 'Consultar precio',
   image: '',
   suggestedTitle: title
 })));
 
 /* Une todo y completa lo que falte (ícono, imagen vacía, etc.). No hace falta tocarlo. */
 const productsData = [...MIS_PRODUCTOS, ...(MOSTRAR_PLANTILLAS ? plantillas : [])].map(p => ({
-  description: '', price: 'Completar precio', image: '', suggestedTitle: '',
+  description: '', price: 'Consultar precio', image: '', suggestedTitle: '',
   ...p,
   icon: (categoryDetails[p.category] || {}).icon || '•'
 }));
@@ -224,6 +224,32 @@ const MARCAS=[
   const chip=m=>'<div class="brand-chip" title="'+m.name+'">'+(m.logo?'<img src="'+m.logo+'" alt="'+m.name+'" loading="lazy">':m.name)+'</div>';
   const one=MARCAS.map(chip).join("");
   t.innerHTML=one+one;
+})();
+</script>
+<script>
+/* Menú lateral móvil: cerrar al tocar afuera / Escape · Buscador: Enter cierra el teclado */
+(function(){
+  var sb=document.getElementById('sidebar'),tg=document.getElementById('menuToggle');
+  if(sb&&tg){
+    var close=function(){sb.classList.remove('open')};
+    document.addEventListener('click',function(e){
+      if(!sb.classList.contains('open'))return;
+      if(sb.contains(e.target)||tg.contains(e.target))return;
+      close();
+    });
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')close()});
+  }
+  var q=document.getElementById('search');
+  if(q){
+    q.setAttribute('enterkeyhint','search');
+    q.addEventListener('keydown',function(e){
+      if(e.key==='Enter'){
+        e.preventDefault();q.blur();
+        var g=document.getElementById('products');
+        if(g)g.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    });
+  }
 })();
 </script>
 </body>
